@@ -98,6 +98,10 @@ function winnerMessage(marker) {
   turn.textContent = `${marker} won!`;
 }
 
+function drawMessage() {
+  turn.textContent = "Board is full! It's a draw";
+}
+
 function finishGame() {
   gameIsRunning = false;
   playAgainBtn.classList.remove("hide");
@@ -122,7 +126,9 @@ cells.forEach((cell) => {
         finishGame();
         return;
       } else if (checkFullBoard(board)) {
-        console.log("Board is full! It's a draw"); // Change later
+        drawMessage();
+        finishGame();
+        return;
       }
 
       marker = changePlayer(marker);
