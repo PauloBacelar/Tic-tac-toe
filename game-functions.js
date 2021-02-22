@@ -5,6 +5,9 @@ const multiPlayerDiv = document.querySelector("div#multi-player-div");
 const cells = applyValueToCells(
   Array.from(document.querySelectorAll("div.cell"))
 );
+const resultTxt = document.querySelector("h2#result-txt");
+const turn = document.querySelector("h3#turn-txt");
+const playAgainBtn = document.querySelector("button#reset-btn");
 let gameIsRunning = false;
 let board = ["", "", "", "", "", "", "", "", ""];
 let marker = "X";
@@ -12,6 +15,7 @@ let marker = "X";
 // Functions
 function startGame() {
   hideOptions();
+  showInfo();
   gameIsRunning = true;
 
   for (let cell of cells) {
@@ -23,6 +27,10 @@ function hideOptions() {
   singlePlayerDiv.classList.add("hide");
   multiPlayerDiv.classList.add("hide");
   startButton.classList.add("hide");
+}
+
+function showInfo() {
+  turn.classList.remove("hide");
 }
 
 function applyValueToCells(cells) {
@@ -66,13 +74,59 @@ function checkWinner(board) {
   );
 }
 
+function checkFullBoard(board) {
+  return !board.includes("");
+}
+
+function changePlayer(currentMarker) {
+  if (currentMarker === "X") {
+    return "O";
+  }
+
+  return "X";
+}
+
+function cellIsEmpty(position) {
+  return board[position] === "";
+}
+
+function writeTurn(currentMarker) {
+  turn.textContent = `${currentMarker} plays`;
+}
+
+function winnerMessage(marker) {
+  turn.textContent = `${marker} won!`;
+}
+
+function finishGame() {
+  gameIsRunning = false;
+  playAgainBtn.classList.remove("hide");
+
+  for (let cell of cells) {
+    cell.style.cursor = "default";
+  }
+}
+
 // Main functions
 startButton.addEventListener("click", startGame);
 
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
     if (gameIsRunning) {
-      writeMarker(marker, cell.value);
+      if (cellIsEmpty(cell.value)) {
+        writeMarker(marker, cell.value);
+      }
+
+      if (checkWinner(board)) {
+        winnerMessage(marker);
+        finishGame();
+        return;
+      } else if (checkFullBoard(board)) {
+        console.log("Board is full! It's a draw"); // Change later
+      }
+
+      marker = changePlayer(marker);
+      writeTurn(marker);
     }
   });
 });
