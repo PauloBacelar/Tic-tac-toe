@@ -40,31 +40,35 @@ body {
   cursor: pointer;
 }
 
-#cell-4 {
-  border: 1.5px solid #f0f0f0;
-}
-
 #cell-0,
-#cell-6 {
+#cell-3 {
   border-right: 1.5px solid #f0f0f0;
-}
-
-#cell-0,
-#cell-2 {
   border-bottom: 1.5px solid #f0f0f0;
 }
 
 #cell-2,
+#cell-5 {
+  border-left: 1.5px solid #f0f0f0;
+  border-bottom: 1.5px solid #f0f0f0;
+}
+
+#cell-1 {
+  border-bottom: 1.5px solid #f0f0f0;
+}
+
+#cell-6 {
+  border-right: 1.5px solid #f0f0f0;
+}
+
+#cell-4 {
+  border-bottom: 1.5px solid #f0f0f0;
+}
+
 #cell-8 {
   border-left: 1.5px solid #f0f0f0;
 }
 
-#cell-6,
-#cell-8 {
-  border-top: 1.5px solid #f0f0f0;
-}
-
-#start-btn {
+button {
   margin-top: 20px;
   padding: 5px;
   background-color: rgb(240, 240, 240);
@@ -75,5 +79,13 @@ body {
 }
 
 #start-btn:hover {
-  background-color: rgba(240, 240, 240, 0.8);
+  color: rgba(240, 240, 240, 0.8);
+}
+
+h2 {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
