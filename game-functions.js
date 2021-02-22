@@ -34,7 +34,36 @@ function applyValueToCells(cells) {
 }
 
 function writeMarker(marker, position) {
+  board[position] = marker;
   cells[position].textContent = marker;
+  cells[position].style.cursor = "default";
+}
+
+function checkWinner(board) {
+  for (let i = 0; i <= 6; i += 3) {
+    if (
+      board[i] === board[i + 1] &&
+      board[i] === board[i + 2] &&
+      board[i] !== ""
+    ) {
+      return true;
+    }
+  }
+
+  for (let i = 0; i <= 2; i++) {
+    if (
+      board[i] === board[i + 3] &&
+      board[i] === board[i + 6] &&
+      board[i] !== ""
+    ) {
+      return true;
+    }
+  }
+
+  return (
+    (board[0] === board[4] && board[0] === board[8] && board[0] !== "") ||
+    (board[6] === board[4] && board[6] === board[2] && board[6] !== "")
+  );
 }
 
 // Main functions
@@ -42,6 +71,8 @@ startButton.addEventListener("click", startGame);
 
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
-    writeMarker(marker, cell.value);
+    if (gameIsRunning) {
+      writeMarker(marker, cell.value);
+    }
   });
 });
