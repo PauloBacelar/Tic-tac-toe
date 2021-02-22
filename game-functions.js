@@ -2,19 +2,12 @@
 const startButton = document.querySelector("h2#start-btn");
 const singlePlayerDiv = document.querySelector("div#single-player-div");
 const multiPlayerDiv = document.querySelector("div#multi-player-div");
-const cells = [
-  document.querySelector("div#cell-0"),
-  document.querySelector("div#cell-1"),
-  document.querySelector("div#cell-2"),
-  document.querySelector("div#cell-3"),
-  document.querySelector("div#cell-4"),
-  document.querySelector("div#cell-5"),
-  document.querySelector("div#cell-6"),
-  document.querySelector("div#cell-7"),
-  document.querySelector("div#cell-8"),
-];
+const cells = applyValueToCells(
+  Array.from(document.querySelectorAll("div.cell"))
+);
 let gameIsRunning = false;
 let board = ["", "", "", "", "", "", "", "", ""];
+let marker = "X";
 
 // Functions
 function startGame() {
@@ -32,5 +25,23 @@ function hideOptions() {
   startButton.classList.add("hide");
 }
 
+function applyValueToCells(cells) {
+  for (let i in cells) {
+    cells[i].value = i;
+  }
+
+  return cells;
+}
+
+function writeMarker(marker, position) {
+  cells[position].textContent = marker;
+}
+
 // Main functions
 startButton.addEventListener("click", startGame);
+
+cells.forEach((cell) => {
+  cell.addEventListener("click", () => {
+    writeMarker(marker, cell.value);
+  });
+});
