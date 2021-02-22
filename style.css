@@ -1,0 +1,79 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #1b1b1b;
+  color: #f0f0f0;
+}
+
+#content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+}
+
+#single-player-div {
+  margin-bottom: 10px;
+}
+
+#single-player,
+#multi-player {
+  margin-right: 7.5px;
+}
+
+#cells-container {
+  display: grid;
+  width: 300px;
+  height: 300px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 40px 0px;
+}
+
+.cell {
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+#cell-4 {
+  border: 1.5px solid #f0f0f0;
+}
+
+#cell-0,
+#cell-6 {
+  border-right: 1.5px solid #f0f0f0;
+}
+
+#cell-0,
+#cell-2 {
+  border-bottom: 1.5px solid #f0f0f0;
+}
+
+#cell-2,
+#cell-8 {
+  border-left: 1.5px solid #f0f0f0;
+}
+
+#cell-6,
+#cell-8 {
+  border-top: 1.5px solid #f0f0f0;
+}
+
+#start-btn {
+  margin-top: 20px;
+  padding: 5px;
+  background-color: rgb(240, 240, 240);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition-duration: 1s;
+}
+
+#start-btn:hover {
+  background-color: rgba(240, 240, 240, 0.8);
+}
