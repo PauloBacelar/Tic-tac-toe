@@ -24,6 +24,7 @@ body {
 #single-player,
 #multi-player {
   margin-right: 7.5px;
+  cursor: pointer;
 }
 
 #cells-container {
@@ -37,7 +38,6 @@ body {
 .cell {
   height: 100px;
   width: 100px;
-  cursor: pointer;
 }
 
 #cell-0,
@@ -74,7 +74,6 @@ button {
   background-color: rgb(240, 240, 240);
   border: none;
   outline: none;
-  cursor: pointer;
   transition-duration: 1s;
 }
 
