@@ -8,6 +8,8 @@ const cells = applyValueToCells(
 const resultTxt = document.querySelector("h2#result-txt");
 const turn = document.querySelector("h3#turn-txt");
 const playAgainBtn = document.querySelector("button#reset-btn");
+const xWins = document.querySelector("span#x-victories");
+const oWins = document.querySelector("span#o-victories");
 let gameIsRunning = false;
 let board = ["", "", "", "", "", "", "", "", ""];
 let marker = "X";
@@ -16,11 +18,23 @@ let marker = "X";
 function startGame() {
   hideOptions();
   showInfo();
+  cells = clearBoard();
+
   gameIsRunning = true;
+  board = ["", "", "", "", "", "", "", "", ""];
+  marker = "X";
 
   for (let cell of cells) {
     cell.style.cursor = "pointer";
   }
+}
+
+function clearBoard() {
+  for (let cell of cells) {
+    cell.textContent = "";
+  }
+
+  return cells;
 }
 
 function hideOptions() {
@@ -111,12 +125,26 @@ function finishGame() {
   }
 }
 
+function changeVictories(winnerMarker) {
+  if (winnerMarker === "X") {
+    xWins.textContent = Number(xWins.textContent) + 1;
+  } else {
+    oWins.textContent = Number(oWins.textContent) + 1;
+  }
+}
+
+function hideTurnText() {
+  turn.classList.add("hide");
+}
+
 // Main functions
 startButton.addEventListener("click", startGame);
 
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
     if (gameIsRunning) {
+      console.log(board);
+
       if (cellIsEmpty(cell.value)) {
         writeMarker(marker, cell.value);
       }
@@ -124,15 +152,24 @@ cells.forEach((cell) => {
       if (checkWinner(board)) {
         winnerMessage(marker);
         finishGame();
-        return;
+        changeVictories(marker);
+
+        playAgainBtn.addEventListener("click", function () {
+          hideTurnText();
+          startGame();
+        });
       } else if (checkFullBoard(board)) {
         drawMessage();
         finishGame();
-        return;
-      }
 
-      marker = changePlayer(marker);
-      writeTurn(marker);
+        playAgainBtn.addEventListener("click", function () {
+          hideTurnText();
+          startGame();
+        });
+      } else {
+        marker = changePlayer(marker);
+        writeTurn(marker);
+      }
     }
   });
 });
