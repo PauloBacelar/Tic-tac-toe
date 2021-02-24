@@ -18,7 +18,6 @@ let marker = "X";
 function startGame() {
   hideOptions();
   showInfo();
-  cells = clearBoard();
 
   gameIsRunning = true;
   board = ["", "", "", "", "", "", "", "", ""];
@@ -27,6 +26,8 @@ function startGame() {
   for (let cell of cells) {
     cell.style.cursor = "pointer";
   }
+
+  turn.textContent = "X plays";
 }
 
 function clearBoard() {
@@ -137,6 +138,10 @@ function hideTurnText() {
   turn.classList.add("hide");
 }
 
+function hidePlayAgainButton() {
+  playAgainBtn.classList.add("hide");
+}
+
 // Main functions
 startButton.addEventListener("click", startGame);
 
@@ -155,16 +160,20 @@ cells.forEach((cell) => {
         changeVictories(marker);
 
         playAgainBtn.addEventListener("click", function () {
+          clearBoard();
           hideTurnText();
           startGame();
+          hidePlayAgainButton();
         });
       } else if (checkFullBoard(board)) {
         drawMessage();
         finishGame();
 
         playAgainBtn.addEventListener("click", function () {
+          clearBoard();
           hideTurnText();
           startGame();
+          hidePlayAgainButton();
         });
       } else {
         marker = changePlayer(marker);
