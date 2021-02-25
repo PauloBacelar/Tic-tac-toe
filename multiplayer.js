@@ -1,7 +1,5 @@
 // Global variables
 const startButton = document.querySelector("h2#start-btn");
-const singlePlayerDiv = document.querySelector("div#single-player-div");
-const multiPlayerDiv = document.querySelector("div#multi-player-div");
 const cells = applyValueToCells(
   Array.from(document.querySelectorAll("div.cell"))
 );
@@ -16,7 +14,7 @@ let marker = "X";
 
 // Functions
 function startGame() {
-  hideOptions();
+  startButton.classList.add("hide");
   showInfo();
 
   gameIsRunning = true;
@@ -36,12 +34,6 @@ function clearBoard() {
   }
 
   return cells;
-}
-
-function hideOptions() {
-  singlePlayerDiv.classList.add("hide");
-  multiPlayerDiv.classList.add("hide");
-  startButton.classList.add("hide");
 }
 
 function showInfo() {
